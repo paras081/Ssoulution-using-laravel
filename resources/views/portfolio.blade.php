@@ -11,7 +11,8 @@
                 @foreach($portfolioItems as $eachPortfolioItem)
                 <div class="col-lg-6" >
                 <!-- exampleModal -->
-                    <a class="portfolio-item"  href="#!" OnClick="show_portfolio('{{ $eachPortfolioItem->FolioHeading }}','{{ url('/demo/img/portfolio_images/'.$eachPortfolioItem->FolioImageUrl2) }}','{{ $eachPortfolioItem->FolioDesc }}','{{ $eachPortfolioItem->FolioWebsiteUrl }}')">
+                    <a class="portfolio-item"  href="#!" OnClick="show_portfolio('{{ $eachPortfolioItem->FolioHeading }}','{{ url('/demo/img/portfolio_images/'.$eachPortfolioItem->FolioImageUrl2) }}')">
+{{--                    <a class="portfolio-item"  href="#!" OnClick="show_portfolio('{{ $eachPortfolioItem->FolioHeading }}','{{ url('/demo/img/portfolio_images/'.$eachPortfolioItem->FolioImageUrl2) }}','{{$eachPortfolioItem->FolioDesc}}','{{$eachPortfolioItem->FolioWebsiteUrl}}')">--}}
                         <div class="caption">
                             <div class="caption-content">
                                 <div class="h2">{{ $eachPortfolioItem->FolioHeading }}</div>
@@ -22,6 +23,7 @@
                         <img class="img-fluid" src="{{ url('/demo/img/portfolio_images/'.$eachPortfolioItem->FolioImageUrl) }}" alt="">
                     </a>
                 </div>
+
                     <button
                         id="portfolioModal"
                         type="button"
@@ -31,7 +33,8 @@
                         style="display: none;"
                     >
                     </button>
-                    <!-- Detailed View Modal -->
+
+                    <!-- Detailed Modal -->
                     <div
                         class="modal fade"
                         id="exampleModal"
@@ -42,7 +45,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">{{ $eachPortfolioItem->FolioHeading }}</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
                                     <button
                                         type="button"
                                         class="btn-close"
@@ -52,8 +55,12 @@
                                 </div>
                                 <div class="modal-body">
                                     <img class="img-fluid modal-image" src="{{ url('/demo/img/portfolio_images/'.$eachPortfolioItem->FolioImageUrl2) }}" alt="">
-                                    <div id="modal-desc"> </div>
-                                    <div id="modal-portfolioUrl"></div>
+
+                                    <div id="modal-loader">
+                                        <div class="modal-desc">
+                                        </div>
+                                    </div>
+                                    <div class="modal-portFolioUrl"> </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
@@ -64,17 +71,18 @@
                             </div>
                         </div>
                     </div>
+{{--                    --}}
                 @endforeach
             </div>
         </div>
     </section>
 
     <script type="text/javascript">
-        function show_portfolio(heading,image,desc,portFolioUrl){
+        function show_portfolio(heading, image,desc,portFolioUrl){
             $('.modal-title').html(heading);
             $('.modal-image').attr('src',image);
-            $('#modal-desc').html(desc);
-            $('#modal-portfolioUrl').html(portFolioUrl);
+            // $('.modal-desc').html(desc);
+            // $('.modal-portFolioUrl').html(portFolioUrl);
             $('#exampleModal').modal('show');
         }
     </script>
